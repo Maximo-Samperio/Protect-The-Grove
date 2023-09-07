@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-
+    [Header("Attributes")]
     private Transform target;
-    public float range = 10f;
+    const float range = 10f;
+    const float fireRate = 1f;
+    private float fireCountdown = 0f;
 
+    [Header("Setup fields")]
     public string enemyTag = "Enemy";
 
     public Transform partToRotate;                          // Because the turret is made of a base/tower and a weapon
     const float turnSpeed = 10f;
+
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+
+  
 
     void Start()
     {
@@ -47,7 +55,7 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-        //if (target != null) { return; }                                       // I tried to use this t save memory but didnt work
+        //if (target != null) { return; }                                       // I tried to use this to save memory but didnt work
 
         // Target lock on 
         Vector3 dir = target.position - transform.position;                     // I get the direction of the enemy to start working on the rotation of the turret
@@ -55,10 +63,29 @@ public class Turret : MonoBehaviour
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;    // I convert that value to Euler Angles to handle it easier in the Y axis + I use Lerp to smooth it out
         partToRotate.rotation = Quaternion.Euler (0f, rotation.y, 0f);          // And I rotate the pivot of the turret
 
+        if (fireCountdown <= 0)
+        {
+            Shoot();
+            fireCountdown = 1f / fireRate;                                      // This allows me to modify fire rate
+        }
+
+        fireCountdown -= Time.deltaTime;                                        // Every second fc is reduced by 1
 
     }
 
-    void OnDrawGizmosSelected()
+    void Shoot()
+    {
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);    // Instantiate bullet prefab
+
+        Cannonball bullet = bulletGO.GetComponent<Cannonball>();                // I pass that to the cannonball script
+
+        if (bullet != null)
+        {
+            bullet.Seek(target);                                                // If there's a bullet, there's a target
+        }
+    }
+
+    void OnDrawGizmosSelected()                                                 // Done to view the radius and range in editor
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, range);
