@@ -8,11 +8,12 @@ public class Node : MonoBehaviour
     BuildManager buildManager;
 
     public Color hoverColor;                    // The color I want the tile to turn on hover
+    public Color notEnoughMoneyColor;           // The color I want the tile to turn on hover
     private Renderer rend;                      // Optimized to just find the renderer once and not every time the mouse hovers above it
     private Color startColor;                   // The original color of the tile
     public Vector3 positionOffset;
 
-    private GameObject turret;
+    public GameObject turret;
 
     private void Start()
     {
@@ -22,6 +23,11 @@ public class Node : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
+    public Vector3 GetBuildPosition()
+    {
+        return transform.position + positionOffset;
+    }
+
     private void OnMouseDown()                  // This builds a turret on click
     {
         if (EventSystem.current.IsPointerOverGameObject())       // I check there is no UI element overlaping
@@ -29,7 +35,7 @@ public class Node : MonoBehaviour
             return;
         }
 
-        if (buildManager.GetTurretToBuild() == null) 
+        if (!buildManager.CanBuild) 
         {
             return;
         }
@@ -40,8 +46,7 @@ public class Node : MonoBehaviour
             return;
         }
 
-        GameObject turretToBuild = buildManager.GetTurretToBuild();        // I pass the GO from the build manager script
-        turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);    // I instantiate the turret
+        buildManager.BuildTurretOn(this);
     }
 
     private void OnMouseEnter()
@@ -51,13 +56,19 @@ public class Node : MonoBehaviour
             return;
         }
 
-        if (buildManager.GetTurretToBuild() == null)            // So that it does not highlight when no turret is selected
+        if (!buildManager.CanBuild)            // So that it does not highlight when no turret is selected
         {
             return;
         }
 
-
-        rend.material.color = hoverColor;       // Set transition to hover color on hover
+        if(buildManager.HasMoney) 
+        {
+            rend.material.color = hoverColor;       // Set transition to hover color on hover
+        }
+        else
+        {
+            rend.material.color = notEnoughMoneyColor;
+        }
     }
 
     private void OnMouseExit()

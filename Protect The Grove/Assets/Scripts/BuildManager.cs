@@ -25,16 +25,37 @@ public class BuildManager : MonoBehaviour
     //--Start of turret instantiation section--//
 
     public GameObject standardTurretPrefab;
-    public GameObject turretToBuild;
 
-    public GameObject GetTurretToBuild ()
+    public GameObject buildEffect;
+
+    public TurretBlueprint turretToBuild;
+
+    public bool CanBuild { get { return turretToBuild != null; } }                      // I check what turret to build
+    public bool HasMoney { get { return PlayerStats.Money >= turretToBuild.cost; } }    // I check if the player has money
+
+
+    public void BuildTurretOn(Node node)                    // Method to create turrets
     {
-        return turretToBuild;
+        if (PlayerStats.Money < turretToBuild.cost)         // I check if the player has enough money
+        {
+            Debug.Log("Not enough gold!");
+            return;
+        }
+
+        PlayerStats.Money -= turretToBuild.cost;            // I substract the cost
+
+        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);    // I instantiate the turret
+        node.turret = turret;
+
+        GameObject effect = (GameObject)Instantiate(buildEffect, node.GetBuildPosition(), Quaternion.identity);     // I play the build FX casted into a game object
+        Destroy(effect, 5f);    // I destroy that temporary GO
+
+        Debug.Log("Turret built. Money left: " + PlayerStats.Money);
     }
 
-    public void SetTurretToBuild(GameObject turret)
+    public void SelectTurretToBuild(TurretBlueprint turret)
     {
-        turretToBuild = turret;
+        turretToBuild = turret;         // I import the selected turret fropm the BP script
     }
 
 }
