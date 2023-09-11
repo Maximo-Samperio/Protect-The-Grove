@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -8,6 +9,8 @@ public class EnemyMovement : MonoBehaviour
 
     private Transform target;
     private int wavepointIndex = 0;
+
+    public Image healthBar;
 
     void Start ()
     {

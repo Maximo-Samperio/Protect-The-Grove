@@ -19,23 +19,22 @@ public class BuildManager : MonoBehaviour
 
         instance = this;                        // I reference the singleton of the build manager instance
     }
+
     //--End of singeleton section--//
 
     //--Start of turret instantiation section--//
 
     public GameObject standardTurretPrefab;
-
-    private GameObject turretToBuild;
+    public GameObject turretToBuild;
 
     public GameObject GetTurretToBuild ()
     {
         return turretToBuild;
     }
 
-    private void Start()
+    public void SetTurretToBuild(GameObject turret)
     {
-        turretToBuild = standardTurretPrefab;
+        turretToBuild = turret;
     }
-
 
 }
