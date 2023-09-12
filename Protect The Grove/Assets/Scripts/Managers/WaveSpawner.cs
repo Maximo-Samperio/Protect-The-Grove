@@ -43,6 +43,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         waveIndex++;
+        PlayerStats.Rounds++;
 
         if (waveIndex == waves.Length)
         {

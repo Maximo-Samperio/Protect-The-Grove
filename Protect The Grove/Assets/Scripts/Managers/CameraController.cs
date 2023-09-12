@@ -14,6 +14,12 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.GameIsOver)                 // So that the camera does not keep moving on game over
+        {
+            this.enabled = false;
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             doMovement = !doMovement;               // this just allows me to toggle on-off the movement to edit while playing
