@@ -7,8 +7,8 @@ public class EnemyMovement : MonoBehaviour
 {
     const float speed = 3f;                 // Enemy speed (const, flyweight)
 
-    const int maxHealth = 100;              // Enemy health (const, flyweight)
-    public int currentHealth;               // Enemy current health
+    const float maxHealth = 100f;              // Enemy health (const, flyweight)
+    private float currentHealth;               // Enemy current health
 
     public const int value = 50;            // Value in money for turret shop (const, flyweight)
 
@@ -48,11 +48,11 @@ public class EnemyMovement : MonoBehaviour
         target = Waypoints.points[wavepointIndex];                  // I set that as the new target
     }
 
-    public void TakeDamage(int amount)              // Allows the enemy to take damage drom each shot
+    public void TakeDamage(float amount)              // Allows the enemy to take damage drom each shot
     {
         currentHealth -= amount;                    // I substract the damage from the current health
 
-        //healthBar.fillAmount = currentHealth / 100f;
+        healthBar.fillAmount = currentHealth / maxHealth;     // For no reason this bugs the bullet impact fx
 
         if (currentHealth <= 0)                     // I check if its <= to cero
         {

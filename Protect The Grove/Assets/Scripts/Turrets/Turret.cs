@@ -55,7 +55,7 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-        //if (target != null) { return; }                                       // I tried to use this to save memory but didnt work
+        if (target == null) { return; }                                       // I tried to use this to save memory but didnt work
 
         // Target lock on 
         Vector3 dir = target.position - transform.position;                     // I get the direction of the enemy to start working on the rotation of the turret
