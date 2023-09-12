@@ -49,12 +49,24 @@ public class Cannonball : MonoBehaviour
     void Damage(Transform enemy)
     {
         EnemyMovement e = enemy.GetComponent<EnemyMovement>();
+        EnemyTank t = enemy.GetComponent<EnemyTank>();
+        EnemyFast f = enemy.GetComponent<EnemyFast>();
+
 
         if (e != null) 
         {
             e.TakeDamage(damage);
         }
 
+        if (t != null)
+        {
+            t.TakeDamage(damage);
+        }
+
+        if (f != null)
+        {
+            f.TakeDamage(damage);
+        }
     }
 
 }

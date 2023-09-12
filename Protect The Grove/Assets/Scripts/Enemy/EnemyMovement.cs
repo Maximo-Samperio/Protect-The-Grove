@@ -67,12 +67,14 @@ public class EnemyMovement : MonoBehaviour
         GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);      // I instantiate the death effect
         Destroy(effect, 5f);                        // I stored the FX as a temporary GO so that I can now easily destroy it 
 
+        EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
         Destroy(gameObject);                        // I destroy the GO
     }
 
     void EndPath()                                  // It activates if the enemy has entered the player's tower
     {
         PlayerStats.Lives--;                        // The player loses one live
+        EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
         Destroy(gameObject);                        // The enemy is destroyed
     }
 }

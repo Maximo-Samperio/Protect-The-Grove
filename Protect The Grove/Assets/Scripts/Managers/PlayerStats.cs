@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     const int startMoney = 100;         // Const int to optimize using flyweight design pattern
 
     public static int Lives;
-    const int startLives = 1;          // Const int to optimize using flyweight design pattern
+    const int startLives = 5;          // Const int to optimize using flyweight design pattern
 
     private void Start()
     {
