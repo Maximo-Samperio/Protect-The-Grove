@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423322073ab09604490d961b1408622b, type: 3}
+  m_Name: TankEnemy
+  m_EditorClassIdentifier: 
+  speed: 1.5
+  maxHealth: 450
+  currentHealth: 450
+  value: 150
+  deathEffect: {fileID: 7224004386152902162, guid: 02a006f2767094c46b0fab4a6020664e, type: 3}

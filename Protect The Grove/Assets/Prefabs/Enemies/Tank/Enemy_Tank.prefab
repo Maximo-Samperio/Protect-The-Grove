@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 3666009627233977175}
   - component: {fileID: 4552183200180907048}
   - component: {fileID: 4581839634108128548}
-  - component: {fileID: 3396549040374177741}
+  - component: {fileID: -1884500122596235500}
   m_Layer: 0
   m_Name: Enemy_Tank
   m_TagString: Enemy
@@ -258,7 +258,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3396549040374177741
+--- !u!114 &-1884500122596235500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,10 +267,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3338430982246267162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cca719ba626ac4fb80dcaf2e39f51d, type: 3}
+  m_Script: {fileID: 11500000, guid: a42d2d3bdad1c854f9616e68d2092e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathEffect: {fileID: 7224004386152902162, guid: 02a006f2767094c46b0fab4a6020664e, type: 3}
+  enemyType: {fileID: 11400000, guid: 4c344b8400585a34f8ce825a5443e56a, type: 2}
   healthBar: {fileID: 5174984837827912471}
 --- !u!1 &5926263534246646863
 GameObject:
