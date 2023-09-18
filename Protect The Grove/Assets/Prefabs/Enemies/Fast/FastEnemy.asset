@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423322073ab09604490d961b1408622b, type: 3}
   m_Name: FastEnemy
   m_EditorClassIdentifier: 
-  speed: 0
-  maxHealth: 0
-  currentHealth: 0
-  value: 0
-  deathEffect: {fileID: 0}
+  speed: 5
+  maxHealth: 100
+  value: 75
+  deathEffect: {fileID: 7224004386152902162, guid: 7a560bd80a3be06468965b884e7e76b7, type: 3}
