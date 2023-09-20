@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -7,7 +9,6 @@ public class EnemySpawner : MonoBehaviour
     public static int EnemiesAlive = 0;                 // To keep track of enemies alive
 
     public Wave[] waves;                                // List with all of the enemies in the wave
-    
     public GameObject enemy;                            // The enemy GO
 
     const float timeBetweenWaves = 3f;                  // Literally the time between waves
@@ -38,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < wave.count; i++)    // Checking the wave count
         {
-            SpawnEnemy(wave.enemy);             // I spawn the enemy specified in the wave.enemy
+            SpawnEnemy(wave.enemy);                             // I spawn the enemy specified in the wave.enemy
             yield return new WaitForSeconds(1 / wave.rate);     // At the specified rate
         }
 
@@ -55,6 +56,7 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy (GameObject enemy)
     {
         Instantiate(enemy, transform.position, transform.rotation);
+        //Wave.Enqueue(enemy);
         EnemiesAlive++;
     }
 }
