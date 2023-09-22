@@ -55,8 +55,9 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy (GameObject enemy)
     {
-        Instantiate(enemy, transform.position, transform.rotation);
-        //Wave.Enqueue(enemy);
+        GameObject newEnemy = (GameObject)Instantiate(enemy, transform.position, transform.rotation);
+        //Wave.Enqueue(newEnemy);
+
         EnemiesAlive++;
     }
 }
