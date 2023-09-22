@@ -19,6 +19,7 @@ public class CameraSwitch : MonoBehaviour
 
         if (Input.GetButtonDown("2Key"))
         {
+            Cursor.lockState = CursorLockMode.Locked;
             cam1.SetActive(false);
             cam2.SetActive(true);
         }
