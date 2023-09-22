@@ -8,7 +8,7 @@ public class Arrow : MonoBehaviour
     private GameObject owner;                   // The object that fired the bullet so that it doesnt collide with itself
 
     const float damage = 75f;                    // Damage done to enemy
-    const float speed = 100f;
+    const float speed = 60f;
     public void SetOwner(GameObject owner)
     {
         this.owner = owner;                     // I set the owner to itself
