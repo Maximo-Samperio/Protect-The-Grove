@@ -5,8 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static bool GameIsOver = false;
+    public static bool LevelCompleted = false;
 
+    public GameObject LevelCompletedUI;
     public GameObject gameOverUI;
+
 
     private void Start()
     {
@@ -20,15 +23,30 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        //if (Input.GetKeyDown("e"))
-        //{
-        //    EndGame();
-        //}
+        if (Input.GetKeyDown("u"))
+        {
+            EndGame();
+        }
+        if (Input.GetKeyDown("y"))
+        {
+            CompleteLevel();
+        }
+
+        if (LevelCompleted == true)
+        {
+            CompleteLevel();
+        }
 
         if (PlayerStats.Lives <= 0)
         {
             EndGame();
         }
+    }
+
+    void CompleteLevel()
+    {
+        GameIsOver = true;                          // Stops camera from moving
+        LevelCompletedUI.SetActive(true);
     }
 
     void EndGame()
@@ -37,4 +55,6 @@ public class GameManager : MonoBehaviour
 
         gameOverUI.SetActive(true);
     }
+
+
 }

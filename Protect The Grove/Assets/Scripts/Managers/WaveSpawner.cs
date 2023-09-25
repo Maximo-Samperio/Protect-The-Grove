@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
 
     const float timeBetweenWaves = 3f;                  // Literally the time between waves
     private float countdown = 2f;                       // A countdown to keep track of time passed
-    private int waveIndex = 0;                          // To keep track of the enemies
+    public int waveIndex = 0;                          // To keep track of the enemies
     private const float secondsBetweenEnemies = 0.5f;
 
     public const float enemyInterval = 3.5f;
@@ -46,9 +46,9 @@ public class EnemySpawner : MonoBehaviour
         waveIndex++;
         PlayerStats.Rounds++;
 
-        if (waveIndex == waves.Length)
+        if (waveIndex + 1 == waves.Length)
         {
-            Debug.Log("Level 1 completed!");
+            GameManager.LevelCompleted = true;
             this.enabled = false;
         }
     }
@@ -56,8 +56,8 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy (GameObject enemy)
     {
         GameObject newEnemy = (GameObject)Instantiate(enemy, transform.position, transform.rotation);
-        //Wave _wave = new Wave();                // I reference the wave script
-        //_wave.Enqueue(enemy);                   // I put the enemy inside the Queue
+        Wave _wave = new Wave();                // I reference the wave script
+        _wave.Enqueue(enemy);                   // I put the enemy inside the Queue
 
         EnemiesAlive++;
     }

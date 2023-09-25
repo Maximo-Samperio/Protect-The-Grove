@@ -11,16 +11,22 @@ public class GameOver : MonoBehaviour
 
     private void OnEnable()
     {
-        roundsText.text = PlayerStats.Rounds.ToString();
+        StartCoroutine(AnimateText());
     }
 
-    public void Retry()
+    IEnumerator AnimateText()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+        roundsText.text = "0";
+        int round = 0;
 
-    public void Menu()
-    {
-        return;
+        yield return new WaitForSeconds(.7f);
+
+        while (round < PlayerStats.Rounds)
+        {
+            round++;
+            roundsText.text = round.ToString();
+
+            yield return new WaitForSeconds(.05f);
+        }
     }
 }
