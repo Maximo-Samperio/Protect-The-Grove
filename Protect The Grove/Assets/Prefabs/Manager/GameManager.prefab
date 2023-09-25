@@ -45,19 +45,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemy: {fileID: 3338430982246267162, guid: 93aefcd2392609e4faf54ccb06f8c07b, type: 3}
+  - _array: []
+    enemyToAdd: 0
+    enemy: {fileID: 3338430982246267162, guid: 93aefcd2392609e4faf54ccb06f8c07b, type: 3}
     count: 1
     rate: 2
-  - enemy: {fileID: 3338430982246267162, guid: 93aefcd2392609e4faf54ccb06f8c07b, type: 3}
+  - _array: []
+    enemyToAdd: 0
+    enemy: {fileID: 3338430982246267162, guid: 93aefcd2392609e4faf54ccb06f8c07b, type: 3}
     count: 2
     rate: 2
-  - enemy: {fileID: 3338430982246267162, guid: 93aefcd2392609e4faf54ccb06f8c07b, type: 3}
+  - _array: []
+    enemyToAdd: 0
+    enemy: {fileID: 3338430982246267162, guid: 93aefcd2392609e4faf54ccb06f8c07b, type: 3}
     count: 5
     rate: 2
-  - enemy: {fileID: 3338430982246267162, guid: ca37d03df3f7aec488e012628869a32b, type: 3}
+  - _array: []
+    enemyToAdd: 0
+    enemy: {fileID: 3338430982246267162, guid: ca37d03df3f7aec488e012628869a32b, type: 3}
     count: 3
     rate: 1
-  - enemy: {fileID: 3338430982246267162, guid: 82df208d41db96148b0898475566daae, type: 3}
+  - _array: []
+    enemyToAdd: 0
+    enemy: {fileID: 3338430982246267162, guid: 82df208d41db96148b0898475566daae, type: 3}
     count: 10
     rate: 3
   enemy: {fileID: 3338430982246267162, guid: 93aefcd2392609e4faf54ccb06f8c07b, type: 3}
@@ -73,6 +83,7 @@ GameObject:
   - component: {fileID: 7369229780856655766}
   - component: {fileID: 4943518826055724773}
   - component: {fileID: 8874445434822772065}
+  - component: {fileID: 2149751597304857762}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -138,3 +149,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverUI: {fileID: 0}
+--- !u!114 &2149751597304857762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310319169746228639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14a46d22f9ce2240b25b1ca83ce8d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}

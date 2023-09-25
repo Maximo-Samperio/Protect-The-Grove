@@ -63,6 +63,9 @@ public class EnemyMovement : MonoBehaviour
         Destroy(effect, 5f);                        // I stored the FX as a temporary GO so that I can now easily destroy it 
 
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
+        Wave _wave = new Wave();
+        _wave.Dequeue();                            // I remove the enemy from the Queue
+
         Destroy(gameObject);                        // I destroy the GO
     }
 
@@ -70,6 +73,8 @@ public class EnemyMovement : MonoBehaviour
     {
         PlayerStats.Lives--;                        // The player loses one live
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
+        Wave _wave = new Wave();
+        _wave.Dequeue();
         Destroy(gameObject);                        // The enemy is destroyed
     }
 }
