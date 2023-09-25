@@ -65,9 +65,10 @@ public class EnemyMovement : MonoBehaviour
 
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
         Wave _wave = new Wave();
+        //FindObjectOfType<AudioManager>().Play("CrabDeath");
 
         Destroy(gameObject);                        // I destroy the GO
-        _wave.Dequeue();                            // I remove the enemy from the Queue
+        //_wave.Dequeue();                            // I remove the enemy from the Queue
 
     }
 
@@ -76,7 +77,7 @@ public class EnemyMovement : MonoBehaviour
         PlayerStats.Lives--;                        // The player loses one live
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
         Destroy(gameObject);                        // The enemy is destroyed
-        _wave.Dequeue();
+        //_wave.Dequeue();
 
     }
 }

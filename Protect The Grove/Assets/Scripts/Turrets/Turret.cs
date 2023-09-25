@@ -75,6 +75,8 @@ public class Turret : MonoBehaviour
 
     void Shoot()
     {
+        FindObjectOfType<AudioManager>().Play("Cannonshot");
+
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);    // Instantiate bullet prefab
 
         Cannonball bullet = bulletGO.GetComponent<Cannonball>();                // I pass that to the cannonball script
@@ -83,6 +85,7 @@ public class Turret : MonoBehaviour
         {
             bullet.Seek(target);                                                // If there's a bullet, there's a target
         }
+
     }
 
     void OnDrawGizmosSelected()                                                 // Done to view the radius and range in editor

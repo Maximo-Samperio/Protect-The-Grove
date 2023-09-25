@@ -6643,11 +6643,93 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28af40736f9158841a92216db0bbac7c, type: 3}
+--- !u!1001 &9092426471454863735
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1944988142437124861, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: sounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944988142437124861, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: sounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6b1ce9f8e8df9ce4db9150477b0a91ec, type: 3}
+    - target: {fileID: 1944988142437124861, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: sounds.Array.data[0].name
+      value: Cannonshot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944988142437124861, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: sounds.Array.data[0].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944988142437124861, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019456539098688684, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019456539098688684, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019456539098688684, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 17.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019456539098688684, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019456539098688684, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019456539098688684, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019456539098688684, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019456539098688684, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019456539098688684, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019456539098688684, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3475764568692542317, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3475764568692542317, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dbc18544b0587274d92c8d2ac0031ddb, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 611173119}
+  - {fileID: 9092426471454863735}
   - {fileID: 481714825611646901}
   - {fileID: 2995896128532471032}
   - {fileID: 5862161433845722994}
