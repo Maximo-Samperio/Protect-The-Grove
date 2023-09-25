@@ -20,10 +20,10 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown("e"))
-        {
-            EndGame();
-        }
+        //if (Input.GetKeyDown("e"))
+        //{
+        //    EndGame();
+        //}
 
         if (PlayerStats.Lives <= 0)
         {

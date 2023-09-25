@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
     private int wavepointIndex = 0;         // Index to keep track of position
 
     public Image healthBar;                 // Healthbar for a prettier UI
+    Wave _wave = new Wave();
 
     void Start ()
     {
@@ -64,17 +65,18 @@ public class EnemyMovement : MonoBehaviour
 
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
         Wave _wave = new Wave();
-        _wave.Dequeue();                            // I remove the enemy from the Queue
 
         Destroy(gameObject);                        // I destroy the GO
+        _wave.Dequeue();                            // I remove the enemy from the Queue
+
     }
 
     void EndPath()                                  // It activates if the enemy has entered the player's tower
     {
         PlayerStats.Lives--;                        // The player loses one live
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
-        Wave _wave = new Wave();
-        _wave.Dequeue();
         Destroy(gameObject);                        // The enemy is destroyed
+        _wave.Dequeue();
+
     }
 }

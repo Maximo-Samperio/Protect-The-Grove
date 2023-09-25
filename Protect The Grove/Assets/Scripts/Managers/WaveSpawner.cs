@@ -55,8 +55,9 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy (GameObject enemy)
     {
-        Wave _wave = new Wave();                // I reference the wave script
-        _wave.Enqueue(enemy);                   // I put the enemy inside the Queue
+        GameObject newEnemy = (GameObject)Instantiate(enemy, transform.position, transform.rotation);
+        //Wave _wave = new Wave();                // I reference the wave script
+        //_wave.Enqueue(enemy);                   // I put the enemy inside the Queue
 
         EnemiesAlive++;
     }

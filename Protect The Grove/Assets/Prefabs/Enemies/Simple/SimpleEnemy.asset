@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423322073ab09604490d961b1408622b, type: 3}
   m_Name: SimpleEnemy
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 4
   maxHealth: 100
-  currentHealth: 100
-  value: 50
+  value: 40
   deathEffect: {fileID: 7224004386152902162, guid: 4922094354f67ce46acd3e9482ba1b5a, type: 3}
