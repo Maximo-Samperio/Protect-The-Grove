@@ -73,6 +73,7 @@ public class EnemyMovement : MonoBehaviour
         if (EnemySpawner.bossActive == true)
         {
             GameManager.LevelCompleted = true;
+            EnemySpawner.bossActive = false;
         }
 
     }

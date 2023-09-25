@@ -13,6 +13,7 @@ public class SceneFacade : MonoBehaviour
 
     public void NextScene()
     {
+        EnemySpawner.bossActive = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

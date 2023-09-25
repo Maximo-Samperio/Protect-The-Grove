@@ -17,6 +17,7 @@ public class Crossbow : MonoBehaviour
     private void Start()
     {
         currentAmmo = magazineSize;
+        canShoot = true;
     }
 
     private void Update()

@@ -20,6 +20,12 @@ public class EnemySpawner : MonoBehaviour
 
     public const float enemyInterval = 3.5f;
 
+
+    private void OnEnable()
+    {
+        bossActive = false;
+    }
+
     void Update()
     {
         if (EnemiesAlive > 0)                   // Checks if there are any enemies alive 
@@ -28,6 +34,13 @@ public class EnemySpawner : MonoBehaviour
         }   
         if (countdown <= 0f)                    // Checks to see if countdown reached 0 and if the previous wave is dead
         {
+            if (waveIndex > waves.Length)
+            {
+                GameManager.LevelCompleted = true;
+                bossActive = false;
+                this.enabled = false;
+            }
+
             StartCoroutine(SpawnWave());        // New wave is spawned
             countdown = timeBetweenWaves;       // countdown is reset
         }
