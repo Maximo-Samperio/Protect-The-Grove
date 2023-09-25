@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TankEnemy
   m_EditorClassIdentifier: 
   speed: 1.5
-  maxHealth: 550
+  maxHealth: 650
   value: 150
   deathEffect: {fileID: 7224004386152902162, guid: 02a006f2767094c46b0fab4a6020664e, type: 3}

@@ -25,6 +25,10 @@ public class EnemySpawner : MonoBehaviour
     {
         bossActive = false;
     }
+    private void Start()
+    {
+        bossActive = false;
+    }
 
     void Update()
     {
