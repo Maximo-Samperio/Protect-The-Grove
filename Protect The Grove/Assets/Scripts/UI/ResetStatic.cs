@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class ResetStatic : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject LevelCompletedUI;
+    public GameObject gameOverUI;
+
+    private void Awake()
+    {
+        LevelCompletedUI.SetActive(false);
+        gameOverUI.SetActive(false);
+    }
+    private void Start()
+    {
+        LevelCompletedUI.SetActive(false);
+        gameOverUI.SetActive(false);
+    }
+    public static void ResetStaticVariable ()
     {
         EnemySpawner.bossActive = false;
     }

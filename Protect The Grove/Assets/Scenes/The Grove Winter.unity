@@ -29774,6 +29774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f348aa4f045ac240895c601597a313a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelCompletedUI: {fileID: 1397639333}
+  gameOverUI: {fileID: 1442505866}
 --- !u!1001 &490261213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70390,6 +70392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8459a7514f2e90f40ab3c31a1165c457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelCompletedUI: {fileID: 0}
+  gameOverUI: {fileID: 0}
 --- !u!114 &1397639336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71533,6 +71537,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8459a7514f2e90f40ab3c31a1165c457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelCompletedUI: {fileID: 0}
+  gameOverUI: {fileID: 0}
 --- !u!1001 &1445604551
 PrefabInstance:
   m_ObjectHideFlags: 0
