@@ -34,7 +34,6 @@ public class Crossbow : MonoBehaviour
         {
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);    // Bullet instantiation
             animator.SetBool("Fire", true);
-            animator.SetBool("Fire", false);
 
 
             Arrow arrowScript = bullet.GetComponent<Arrow>();
@@ -47,8 +46,8 @@ public class Crossbow : MonoBehaviour
 
 
             if (currentAmmo <= 0)           // Start the reload coroutine if we're out of ammo
-
             {
+                animator.SetBool("Fire", false);
                 StartCoroutine(Reload());               // Begin reload
             }
 

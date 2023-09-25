@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
     public Wave[] waves;                                // List with all of the enemies in the wave
     public GameObject enemy;                            // The enemy GO
 
+    public static bool bossActive = false;
+
     const float timeBetweenWaves = 3f;                  // Literally the time between waves
     private float countdown = 2f;                       // A countdown to keep track of time passed
     public int waveIndex = 0;                          // To keep track of the enemies
@@ -31,10 +33,21 @@ public class EnemySpawner : MonoBehaviour
         }
 
         countdown -= Time.deltaTime;            // Decreases time constantly
+
+        if (waveIndex > waves.Length)
+        {
+            GameManager.LevelCompleted = true;
+            this.enabled = false;
+        }
     }
 
     IEnumerator SpawnWave()                     // coroutine to spawn waves
     {
+        if (waveIndex > waves.Length)
+        {
+            GameManager.LevelCompleted = true;
+            this.enabled = false;
+        }
         Wave wave = waves[waveIndex];           // import wave
 
         for (int i = 0; i < wave.count; i++)    // Checking the wave count
@@ -46,7 +59,7 @@ public class EnemySpawner : MonoBehaviour
         waveIndex++;
         PlayerStats.Rounds++;
 
-        if (waveIndex + 1 == waves.Length)
+        if (waveIndex > waves.Length)
         {
             GameManager.LevelCompleted = true;
             this.enabled = false;
@@ -58,6 +71,10 @@ public class EnemySpawner : MonoBehaviour
         GameObject newEnemy = (GameObject)Instantiate(enemy, transform.position, transform.rotation);
         //Wave _wave = new Wave();                // I reference the wave script
         //_wave.Enqueue(enemy);                   // I put the enemy inside the Queue
+        if (waveIndex == 5)
+        {
+            bossActive = true;
+        }
 
         EnemiesAlive++;
     }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BossEnemy
   m_EditorClassIdentifier: 
   speed: 2
-  maxHealth: 5000
+  maxHealth: 4250
   value: 800
   deathEffect: {fileID: 7224004386152902162, guid: ccac028a8dbbcb446b97dd28449984b0, type: 3}

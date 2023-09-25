@@ -70,10 +70,20 @@ public class EnemyMovement : MonoBehaviour
         Destroy(gameObject);                        // I destroy the GO
         //_wave.Dequeue();                            // I remove the enemy from the Queue
 
+        if (EnemySpawner.bossActive == true)
+        {
+            GameManager.LevelCompleted = true;
+        }
+
     }
 
     void EndPath()                                  // It activates if the enemy has entered the player's tower
     {
+        if (EnemySpawner.bossActive == true)
+        {
+            GameManager.LevelCompleted = true;
+        }
+
         PlayerStats.Lives--;                        // The player loses one live
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
         Destroy(gameObject);                        // The enemy is destroyed

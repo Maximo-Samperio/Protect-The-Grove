@@ -7,8 +7,15 @@ public class CameraController : MonoBehaviour
     const float panSpeed = 30f;                     // Usage of const variables to optimize in a flyweight manner
     const float panBorderThickness = 10f;           // Buffer varr to just make the panning a bit more responisve
     const float scrollSpeed = 5f;                   // Speed for scrollwheel zoom
-    const float minY = 10f;                         // Ground for camera to not go through objects
-    const float maxY = 50f;                         // Ceiling for camera to not go outside of boundaries
+
+    const float minY = 20f;                         // Ground for camera to not go through objects
+    const float maxY = 40f;                         // Ceiling for camera to not go outside of boundaries
+
+    const float minX = -20f;
+    const float maxX = 20f;
+    
+    const float minZ = -10f;
+    const float maxZ = 10f;
 
     private bool doMovement = true;
 
@@ -51,6 +58,8 @@ public class CameraController : MonoBehaviour
             transform.Translate(Vector3.right * panSpeed * Time.deltaTime, Space.World);        // If pressed the cam moves rightward the set pan speed (note that I set the axis to the world instead of the camera's)
         }
 
+        
+
         // -- Scrolling input -- //
         float scroll = Input.GetAxis("Mouse ScrollWheel");              // I get the input for the wheel
 
@@ -61,6 +70,15 @@ public class CameraController : MonoBehaviour
         pos.y = Mathf.Clamp(pos.y, minY, maxY);                         // I set a limit for camera to not go off boundaries
 
         transform.position = pos;                                       // I move the camera
+
+        pos.x = Mathf.Clamp(pos.x, minX, maxX);
+
+        transform.position = pos;                                       // I move the camera
+
+        pos.z = Mathf.Clamp(pos.z, minZ, maxZ);
+
+        transform.position = pos;                                       // I move the camera
+
 
     }
 }
