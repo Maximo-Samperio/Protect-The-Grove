@@ -24,6 +24,7 @@ public class SceneFacade : MonoBehaviour
     public void NextScene()
     {
         EnemySpawner.bossActive = false;
+        GameManager.GameIsOver = false;
         Debug.Log("Resetting static variable");
 
         LevelCompletedUI.SetActive(false);
@@ -35,6 +36,8 @@ public class SceneFacade : MonoBehaviour
 
     public void ReloadScene()
     {
+        EnemySpawner.bossActive = false;
+        GameManager.GameIsOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

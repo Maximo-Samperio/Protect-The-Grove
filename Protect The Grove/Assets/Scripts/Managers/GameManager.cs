@@ -10,6 +10,12 @@ public class GameManager : MonoBehaviour
     public GameObject LevelCompletedUI;
     public GameObject gameOverUI;
 
+    private void OnEnable()
+    {
+        GameIsOver = false;
+        LevelCompleted = false;
+        LevelCompletedUI.SetActive(false);
+    }
 
     private void Start()
     {
@@ -35,7 +41,6 @@ public class GameManager : MonoBehaviour
         if (LevelCompleted == true)
         {
             CompleteLevel();
-            EnemySpawner.bossActive = false;
         }
 
         if (PlayerStats.Lives <= 0)
@@ -45,9 +50,8 @@ public class GameManager : MonoBehaviour
     }
 
     void CompleteLevel()
-    {
+    {        
         GameIsOver = true;                          // Stops camera from moving
-        EnemySpawner.bossActive = false;
         LevelCompletedUI.SetActive(true);
     }
 

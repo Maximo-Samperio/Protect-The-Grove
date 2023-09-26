@@ -9,6 +9,7 @@ public class Arrow : MonoBehaviour
 
     const float damage = 75f;                    // Damage done to enemy
     const float speed = 60f;
+    const float range = 1000f;
     public void SetOwner(GameObject owner)
     {
         this.owner = owner;                     // I set the owner to itself

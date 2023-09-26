@@ -9,6 +9,8 @@ public class BuildManager : MonoBehaviour
     // Usage of singleton to reference the build manager instance only once for all nodes
     public static BuildManager instance;
 
+
+
     private void Awake()
     {
         if (instance != null)
@@ -30,6 +32,9 @@ public class BuildManager : MonoBehaviour
 
     public TurretBlueprint turretToBuild;
 
+    private Stack<GameObject> placedTurrets = new Stack<GameObject>();      // I define a stack to track placed turrets
+    
+
     public bool CanBuild { get { return turretToBuild != null; } }                      // I check what turret to build
     public bool HasMoney { get { return PlayerStats.Money >= turretToBuild.cost; } }    // I check if the player has money
 
@@ -47,6 +52,8 @@ public class BuildManager : MonoBehaviour
         GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);    // I instantiate the turret
         node.turret = turret;
 
+        placedTurrets.Push(turret);         // I push the new turret on top of the stack
+
         GameObject effect = (GameObject)Instantiate(buildEffect, node.GetBuildPosition(), Quaternion.identity);     // I play the build FX casted into a game object
         Destroy(effect, 5f);    // I destroy that temporary GO
 
@@ -57,5 +64,16 @@ public class BuildManager : MonoBehaviour
     {
         turretToBuild = turret;         // I import the selected turret fropm the BP script
     }
+
+    public void UndoTurretPlacement()
+    {
+        if (placedTurrets.Count > 0)
+        {
+            GameObject removedTurret = placedTurrets.Pop();
+            PlayerStats.Money += turretToBuild.cost;
+            Destroy(removedTurret);
+        }
+    }
+
 
 }
