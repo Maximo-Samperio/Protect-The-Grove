@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public EnemyType enemyType;
+    private EnemySpawner spawner;
 
     private float currentHealth;            // Enemy current health
 
@@ -17,6 +18,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Start ()
     {
+        spawner = GameObject.FindObjectOfType<EnemySpawner>();
         target = Waypoints.points[0];               // I establish that the enemy will target the waypoints in the path
         currentHealth = enemyType.maxHealth;        // I set the current health to be that of the max health on start
     }
@@ -58,17 +60,20 @@ public class EnemyMovement : MonoBehaviour
 
     void Die()
     {
-        PlayerStats.Money += enemyType.value;                 // I give the player the corresponding ammount of gold
+        PlayerStats.Money += enemyType.value;       // I give the player the corresponding ammount of gold
 
         GameObject effect = (GameObject)Instantiate(enemyType.deathEffect, transform.position, Quaternion.identity);      // I instantiate the death effect
         Destroy(effect, 5f);                        // I stored the FX as a temporary GO so that I can now easily destroy it 
 
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
         Wave _wave = new Wave();
-        //FindObjectOfType<AudioManager>().Play("CrabDeath");
+        //FindObjectOfType<AudioManager>().Play("enemyDeath");
+
+        spawner.RemoveEnemyFromQueue(gameObject);
+
 
         Destroy(gameObject);                        // I destroy the GO
-        //_wave.Dequeue();                            // I remove the enemy from the Queue
+        //_wave.Dequeue(gameObject);                  // I remove the enemy from the Queue
 
         if (EnemySpawner.bossActive == true)
         {
@@ -87,8 +92,10 @@ public class EnemyMovement : MonoBehaviour
 
         PlayerStats.Lives--;                        // The player loses one live
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
+        spawner.RemoveEnemyFromQueue(gameObject);
         Destroy(gameObject);                        // The enemy is destroyed
-        //_wave.Dequeue();
+
+        //_wave.Dequeue(gameObject);
 
     }
 }

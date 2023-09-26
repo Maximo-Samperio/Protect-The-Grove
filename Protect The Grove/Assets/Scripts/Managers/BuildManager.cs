@@ -9,8 +9,6 @@ public class BuildManager : MonoBehaviour
     // Usage of singleton to reference the build manager instance only once for all nodes
     public static BuildManager instance;
 
-
-
     private void Awake()
     {
         if (instance != null)

@@ -17,18 +17,18 @@ public class Wave
     public int count;
     public float rate;
 
-    public void Enqueue (GameObject newItem)        // Method to put enemies inside the Q
-    {
-        _array[_tail] = newItem;                    // I pass the item
-        _tail = (_tail + 1) % _array.Length;        // Modular operator so that tail does not go out of bounds
-        _size++;                                    // I increase the size of the Q
-    }
+    //public void Enqueue (GameObject newItem)        // Method to put enemies inside the Q
+    //{
+    //    _array[_tail] = newItem;                    // I pass the item
+    //    _tail = (_tail + 1) % _array.Length;        // Modular operator so that tail does not go out of bounds
+    //    _size++;                                    // I increase the size of the Q
+    //}
 
-    public void Dequeue()                           // Method to remove enemies from Q (opposite to Enqueue)
-    {
-        GameObject element = _array[_head];
-        _head = (_head + 1) % _array.Length;
-        _size--;
-        return;
-    }
+    //public void Dequeue(GameObject item)                           // Method to remove enemies from Q (opposite to Enqueue)
+    //{
+    //    GameObject element = _array[_head];
+    //    _head = (_head + 1) % _array.Length;
+    //    _size--;
+    //    return;
+    //}
 }

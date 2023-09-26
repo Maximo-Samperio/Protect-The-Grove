@@ -54,6 +54,7 @@ public class Cannonball : MonoBehaviour
         if (e != null) 
         {
             e.TakeDamage(damage);
+
         }
     }
 

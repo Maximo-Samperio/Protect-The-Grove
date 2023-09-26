@@ -9,6 +9,10 @@ public class EnemySpawner : MonoBehaviour
     public static int EnemiesAlive = 0;                 // To keep track of enemies alive
 
     public Wave[] waves;                                // List with all of the enemies in the wave
+    private Queue<GameObject> enemyQueue = new Queue<GameObject>();         // Queue to store enemies
+
+    Wave _wave = new Wave();                            // I reference the wave script
+
     public GameObject enemy;                            // The enemy GO
 
     public static bool bossActive = false;
@@ -35,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
         if (EnemiesAlive > 0)                   // Checks if there are any enemies alive 
         {
             return;                             // If there are, return
-        }   
+        }
         if (countdown <= 0f)                    // Checks to see if countdown reached 0 and if the previous wave is dead
         {
             if (waveIndex > waves.Length)
@@ -83,10 +87,11 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void SpawnEnemy (GameObject enemy)
+    void SpawnEnemy(GameObject enemy)
     {
         GameObject newEnemy = (GameObject)Instantiate(enemy, transform.position, transform.rotation);
-        //Wave _wave = new Wave();                // I reference the wave script
+        AddEnemyToQueue(enemy);
+
         //_wave.Enqueue(enemy);                   // I put the enemy inside the Queue
         if (waveIndex == 5)
         {
@@ -94,5 +99,20 @@ public class EnemySpawner : MonoBehaviour
         }
 
         EnemiesAlive++;
+    }
+
+    public void AddEnemyToQueue(GameObject enemy)
+    {
+        enemyQueue.Enqueue(enemy);
+    }
+
+    public void RemoveEnemyFromQueue(GameObject enemy)
+    {
+        if (enemyQueue.Contains(enemy))
+        {
+            enemyQueue.Dequeue(); // Remove the enemy from the front of the queue
+            Destroy(enemy); // Destroy the enemy GameObject
+        }
+
     }
 }
