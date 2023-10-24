@@ -7,20 +7,19 @@ public class WaypointGraph : MonoBehaviour
 
     void Start()
     {
-        PopulateWaypoints();
+        //PopulateWaypoints();
         ConnectWaypoints();
     }
 
-    void PopulateWaypoints()
-    {
-        // Automatically create waypoints based on child Transforms
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Transform child = transform.GetChild(i);
-            Waypoints waypoint = new Waypoints(child.position);
-            waypoints.Add(waypoint);
-        }
-    }
+    //void PopulateWaypoints()
+    //{
+    //    // Automatically create waypoints based on child Transforms
+    //    for (int i = 0; i < transform.childCount; i++)
+    //    {
+    //        Transform child = transform.GetChild(i);
+    //        waypoints.Add(child.GetComponent<Waypoints>());
+    //    }
+    //}
 
     void ConnectWaypoints()
     {

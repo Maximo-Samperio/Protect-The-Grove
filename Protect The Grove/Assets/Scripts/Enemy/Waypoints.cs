@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    public Vector3 Position { get; }
-    public List<Waypoints> Neighbors { get; }
+    public Vector3 Position { get; private set; }
+    public List<Waypoints> Neighbors { get; private set;}
 
-    public Waypoints(Vector3 position)
+
+    public void setup (Vector3 position)
     {
         Position = position;
         Neighbors = new List<Waypoints>();
@@ -15,6 +16,11 @@ public class Waypoints : MonoBehaviour
 
     public void AddNeighbor(Waypoints neighbor)
     {
+        if (Neighbors == null)
+        {
+            Neighbors = new List<Waypoints> ();
+        }
+
         if (!Neighbors.Contains(neighbor))
         {
             Neighbors.Add(neighbor);

@@ -17,7 +17,9 @@ public class Node : MonoBehaviour
 
     private void Start()
     {
-        rend = GetComponent<Renderer>();        // This allows me to just store the renderer in a private var and thats it
+                // This allows me to just store the renderer in a private var and thats it
+        
+        if (rend = GetComponent<Renderer>())
         startColor = rend.material.color;
 
         buildManager = BuildManager.instance;
