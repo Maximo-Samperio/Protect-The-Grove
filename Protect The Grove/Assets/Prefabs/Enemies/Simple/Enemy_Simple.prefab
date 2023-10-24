@@ -273,6 +273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: {fileID: 11400000, guid: e08c768ba50d4fb4896c5a21aff1958e, type: 2}
   healthBar: {fileID: 5174984837827912471}
+  waypointGraph: {fileID: 132818775437784143, guid: 472fdc9f937d08c4a8395b233b7a2965, type: 3}
+  speed: 5
 --- !u!54 &-6167490790210517868
 Rigidbody:
   m_ObjectHideFlags: 0

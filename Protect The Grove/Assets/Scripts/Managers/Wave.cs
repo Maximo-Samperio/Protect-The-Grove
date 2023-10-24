@@ -17,7 +17,7 @@ public class Wave
     public int count;
     public float rate;
 
-    //public void Enqueue (GameObject newItem)        // Method to put enemies inside the Q
+    //public void Enqueue(GameObject newItem)        // Method to put enemies inside the Q
     //{
     //    _array[_tail] = newItem;                    // I pass the item
     //    _tail = (_tail + 1) % _array.Length;        // Modular operator so that tail does not go out of bounds

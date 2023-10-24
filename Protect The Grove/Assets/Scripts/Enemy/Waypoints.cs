@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    public static Transform[] points;
+    public Vector3 Position { get; }
+    public List<Waypoints> Neighbors { get; }
 
-    void Awake ( ) 
+    public Waypoints(Vector3 position)
     {
-        // Here I create one space in the array for each child of Waypoint, I loop through them and then set every place in the array equal to the child
-        // Thus, allowing me to have the enemy move without having it find and order the waypoints
-        points = new Transform[transform.childCount];
+        Position = position;
+        Neighbors = new List<Waypoints>();
+    }
 
-        for (int i = 0; i < points.Length; i++)
+    public void AddNeighbor(Waypoints neighbor)
+    {
+        if (!Neighbors.Contains(neighbor))
         {
-            points[i] = transform.GetChild(i);
+            Neighbors.Add(neighbor);
+            neighbor.AddNeighbor(this);
         }
     }
 }

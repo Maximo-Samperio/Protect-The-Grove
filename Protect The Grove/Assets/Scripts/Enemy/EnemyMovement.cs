@@ -16,35 +16,44 @@ public class EnemyMovement : MonoBehaviour
     public Image healthBar;                 // Healthbar for a prettier UI
     Wave _wave = new Wave();
 
+
+    public WaypointGraph waypointGraph;
+    public float speed = 5.0f;
+    private List<Waypoints> currentPath;
+    private int currentWaypointIndex = 0;
+
     void Start ()
     {
         spawner = GameObject.FindObjectOfType<EnemySpawner>();
-        target = Waypoints.points[0];               // I establish that the enemy will target the waypoints in the path
+        waypointGraph = FindObjectOfType<WaypointGraph>();
+        FindAndFollowPath();
         currentHealth = enemyType.maxHealth;        // I set the current health to be that of the max health on start
+    }
+    void FindAndFollowPath()
+    {
+        Waypoints startWaypoint = waypointGraph.waypoints[0]; // Starting waypoint
+        Waypoints endWaypoint = waypointGraph.waypoints[1];   // End waypoint
+        currentPath = Dijkstra.FindShortestPath(startWaypoint, endWaypoint);
     }
 
     void Update () 
     {
-        Vector3 dir = target.position - transform.position;                             // calculate where the next waypoint is
-        transform.Translate(dir.normalized * enemyType.speed * Time.deltaTime, Space.World);      // I move the enemy towards it
-
-        if (Vector3.Distance(transform.position, target.position) <= 0.2f)              // I add a small buffer so that it doesnt glitch
+        if (currentPath != null && currentWaypointIndex < currentPath.Count)
         {
-            GetNextWaypoint();                                                          // I find the next waypoint in the array
+            Waypoints targetWaypoint = currentPath[currentWaypointIndex];
+            Vector3 targetPosition = targetWaypoint.Position;
+
+            float step = speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            {
+                currentWaypointIndex++;
+            }
         }
+
     }
 
-    void GetNextWaypoint()                                          // Does exactly that
-    {
-        if (wavepointIndex >= Waypoints.points.Length - 1)          // I check if the enemy has reached the end
-        {
-            EndPath();                                              // I substract a live and destroy GO
-            return;
-        }
-            
-        wavepointIndex++;                                           // I advance to the next index in the array
-        target = Waypoints.points[wavepointIndex];                  // I set that as the new target
-    }
 
     public void TakeDamage(float amount)              // Allows the enemy to take damage drom each shot
     {

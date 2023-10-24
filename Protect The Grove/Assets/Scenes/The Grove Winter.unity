@@ -29518,7 +29518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9132607460881091341, guid: e394b0f62091f42458c5b6b435cf5d93, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.82
+      value: 1.73
       objectReference: {fileID: 0}
     - target: {fileID: 9132607460881091341, guid: e394b0f62091f42458c5b6b435cf5d93, type: 3}
       propertyPath: m_LocalPosition.y
@@ -47063,7 +47063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9132607460881091341, guid: e394b0f62091f42458c5b6b435cf5d93, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.82
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: 9132607460881091341, guid: e394b0f62091f42458c5b6b435cf5d93, type: 3}
       propertyPath: m_LocalPosition.y
@@ -48788,6 +48788,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 641225381002853483, guid: c75ad9d60533034469b2f3b7daee5e2e, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.85098046
+      objectReference: {fileID: 0}
+    - target: {fileID: 641225381002853483, guid: c75ad9d60533034469b2f3b7daee5e2e, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.85098046
+      objectReference: {fileID: 0}
+    - target: {fileID: 641225381002853483, guid: c75ad9d60533034469b2f3b7daee5e2e, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.54901963
+      objectReference: {fileID: 0}
     - target: {fileID: 6065285196058421772, guid: c75ad9d60533034469b2f3b7daee5e2e, type: 3}
       propertyPath: m_Name
       value: Main Camera
