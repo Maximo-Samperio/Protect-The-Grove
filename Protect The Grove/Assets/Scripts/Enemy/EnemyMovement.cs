@@ -32,7 +32,7 @@ public class EnemyMovement : MonoBehaviour
     void FindAndFollowPath()
     {
         Waypoints startWaypoint = waypointGraph.waypoints[0]; // Starting waypoint
-        Waypoints endWaypoint = waypointGraph.waypoints[1];   // End waypoint
+        Waypoints endWaypoint = waypointGraph.waypoints[10];   // End waypoint
         currentPath = Dijkstra.FindShortestPath(startWaypoint, endWaypoint);
     }
 

@@ -24,7 +24,7 @@ public class WaypointGraph : MonoBehaviour
     void ConnectWaypoints()
     {
         // Automatically connect waypoints based on proximity
-        float maxConnectionDistance = 20f;
+        float maxConnectionDistance = 1.92f;
 
         for (int i = 0; i < waypoints.Count; i++)
         {

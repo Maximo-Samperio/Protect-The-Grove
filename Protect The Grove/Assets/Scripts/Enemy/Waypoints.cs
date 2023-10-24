@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    public Vector3 Position { get; private set; }
+    public Vector3 Position => transform.position;
     public List<Waypoints> Neighbors { get; private set;}
 
 
-    public void setup (Vector3 position)
-    {
-        Position = position;
-        Neighbors = new List<Waypoints>();
-    }
+    //public void setup (Vector3 position)
+    //{
+    //    Position = position;
+    //    Neighbors = new List<Waypoints>();
+    //}
 
     public void AddNeighbor(Waypoints neighbor)
     {
