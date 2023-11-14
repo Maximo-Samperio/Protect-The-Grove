@@ -4,27 +4,14 @@ using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    public Vector3 Position => transform.position;
-    public List<Waypoints> Neighbors { get; private set;}
+    public static Transform[] points;
 
-
-    //public void setup (Vector3 position)
-    //{
-    //    Position = position;
-    //    Neighbors = new List<Waypoints>();
-    //}
-
-    public void AddNeighbor(Waypoints neighbor)
+    void Awake()
     {
-        if (Neighbors == null)
+        points = new Transform[transform.childCount];
+        for (int i = 0; i < points.Length; i++)
         {
-            Neighbors = new List<Waypoints> ();
-        }
-
-        if (!Neighbors.Contains(neighbor))
-        {
-            Neighbors.Add(neighbor);
-            neighbor.AddNeighbor(this);
+            points[i] = transform.GetChild(i);
         }
     }
 }

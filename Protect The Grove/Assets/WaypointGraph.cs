@@ -3,43 +3,35 @@ using System.Collections.Generic;
 
 public class WaypointGraph : MonoBehaviour
 {
-    public List<Waypoints> waypoints = new List<Waypoints>();
+    //public static WaypointGraph instance; // Singleton instance
 
-    void Start()
-    {
-        //PopulateWaypoints();
-        ConnectWaypoints();
-    }
+    //public List<Waypoints> waypoints;
 
-    //void PopulateWaypoints()
+    //void Awake()
     //{
-    //    // Automatically create waypoints based on child Transforms
-    //    for (int i = 0; i < transform.childCount; i++)
+    //    // Ensure only one instance of WaypointGraphManager exists
+    //    if (instance == null)
     //    {
-    //        Transform child = transform.GetChild(i);
-    //        waypoints.Add(child.GetComponent<Waypoints>());
+    //        instance = this;
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
     //    }
     //}
 
-    void ConnectWaypoints()
-    {
-        // Automatically connect waypoints based on proximity
-        float maxConnectionDistance = 1.92f;
+    //// Add a method to find the next waypoint based on the current waypoint
+    //public Waypoints GetNextWaypoint(Waypoints currentWaypoint)
+    //{
+    //    if (currentWaypoint.connectedWaypoints.Length > 0)
+    //    {
+    //        int randomIndex = Random.Range(0, currentWaypoint.connectedWaypoints.Length);
+    //        Waypoints nextWaypoint = currentWaypoint.connectedWaypoints[randomIndex];
+    //        Debug.Log("Next waypoint: " + nextWaypoint.gameObject.name);
+    //        return nextWaypoint;
+    //    }
 
-        for (int i = 0; i < waypoints.Count; i++)
-        {
-            Waypoints waypointA = waypoints[i];
-
-            for (int j = i + 1; j < waypoints.Count; j++)
-            {
-                Waypoints waypointB = waypoints[j];
-                float distance = Vector3.Distance(waypointA.Position, waypointB.Position);
-
-                if (distance <= maxConnectionDistance)
-                {
-                    waypointA.AddNeighbor(waypointB);
-                }
-            }
-        }
-    }
+    //    Debug.LogWarning("No connected waypoints for: " + currentWaypoint.gameObject.name);
+    //    return null;
+    //}
 }

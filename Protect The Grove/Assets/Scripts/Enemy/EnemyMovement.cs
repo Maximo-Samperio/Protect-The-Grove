@@ -2,57 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyMovement : MonoBehaviour
 {
     public EnemyType enemyType;
     private EnemySpawner spawner;
 
+    private int wavepointIndex = 0;
+
     private float currentHealth;            // Enemy current health
 
     private Transform target;               // Target meaning the next waypoint in the path
-    private int wavepointIndex = 0;         // Index to keep track of position
 
     public Image healthBar;                 // Healthbar for a prettier UI
     Wave _wave = new Wave();
 
+    public WaypointGraph waypointManager;
+    private Waypoints currentWaypoint;
 
-    public WaypointGraph waypointGraph;
-    public float speed = 5.0f;
-    private List<Waypoints> currentPath;
-    private int currentWaypointIndex = 0;
 
     void Start ()
     {
         spawner = GameObject.FindObjectOfType<EnemySpawner>();
-        waypointGraph = FindObjectOfType<WaypointGraph>();
-        FindAndFollowPath();
         currentHealth = enemyType.maxHealth;        // I set the current health to be that of the max health on start
+
+        target = Waypoints.points[0];
     }
-    void FindAndFollowPath()
-    {
-        Waypoints startWaypoint = waypointGraph.waypoints[0]; // Starting waypoint
-        Waypoints endWaypoint = waypointGraph.waypoints[10];   // End waypoint
-        currentPath = Dijkstra.FindShortestPath(startWaypoint, endWaypoint);
-    }
+
 
     void Update () 
     {
-        if (currentPath != null && currentWaypointIndex < currentPath.Count)
+        Vector3 dir = target.position - transform.position;
+        transform.Translate(dir.normalized * enemyType.speed * Time.deltaTime, Space.World);
+
+        if (Vector3.Distance(transform.position, target.position) <= 0.4f)
         {
-            Waypoints targetWaypoint = currentPath[currentWaypointIndex];
-            Vector3 targetPosition = targetWaypoint.Position;
-
-            float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
-
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-            {
-                currentWaypointIndex++;
-            }
+            GetNextWaypoint();
         }
 
     }
+
+    void GetNextWaypoint()
+    {
+        if (wavepointIndex >= Waypoints.points.Length - 1)
+        {
+            EndPath();
+            return;
+        }
+
+        wavepointIndex++;
+        target = Waypoints.points[wavepointIndex];
+    }
+
 
 
     public void TakeDamage(float amount)              // Allows the enemy to take damage drom each shot
