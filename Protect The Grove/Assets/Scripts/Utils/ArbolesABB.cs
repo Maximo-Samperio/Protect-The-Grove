@@ -7,117 +7,116 @@ using System.Diagnostics;
 using UnityEngine;
 
 
-public class NodoABB
+public class BinarySearchTreeNode
 {
-    // datos a almacenar, en este caso un entero
+    
     public int info;
     public GameObject go;
-    // referencia los nodos izquiero y derecho
-    public ABB hijoIzq;
-    public ABB hijoDer;
+    public BinaryTree leftChild;
+    public BinaryTree rightChild;
 }
 
-public class ABB
+public class BinaryTree
 {
-    public NodoABB raiz;
+    public BinarySearchTreeNode root;
 
-    public int Raiz()
+    public int Root()
     {
-        return raiz.info;
+        return root.info;
     }
 
-    public bool ArbolVacio()
+    public bool IsTreeEmpty()
     {
-        return (raiz == null);
+        return (root == null);
     }
 
-    public void InicializarArbol()
+    public void InitializeTree()
     {
-        raiz = null;
+        root = null;
     }
 
-    public ABB HijoDer()
+    public BinaryTree RightChild()
     {
-        return raiz.hijoDer;
+        return root.rightChild;
     }
 
-    public ABB HijoIzq()
+    public BinaryTree LeftChild()
     {
-        return raiz.hijoIzq;
+        return root.leftChild;
     }
 
-    public void AgregarElem(int x, GameObject go)
+    public void AddElement(int x, GameObject go)
     {
-        if (raiz == null)
+        if (root == null)
         {
-            raiz = new NodoABB();
-            raiz.info = x;
-            raiz.go = go;
-            raiz.hijoIzq = new ABB();
-            raiz.hijoIzq.InicializarArbol();
-            raiz.hijoDer = new ABB();
-            raiz.hijoDer.InicializarArbol();
+            root = new NodoABB();
+            root.info = x;
+            root.go = go;
+            root.leftChild = new ABB();
+            root.leftChild.InitializeTree();
+            root.rightChild = new ABB();
+            root.rightChild.InitializeTree();
         }
-        else if (raiz.info > x)
+        else if (root.info > x)
         {
-            raiz.hijoIzq.AgregarElem(x, go);
+            root.leftChild.AddElement(x, go);
         }
-        else if (raiz.info < x)
+        else if (root.info < x)
         {
-            raiz.hijoDer.AgregarElem(x, go);
+            root.rightChild.AddElement(x, go);
         }
     }
 
-    public void EliminarElem(int x)
+    public void DeleteElement(int x)
     {
-        if (raiz != null)
+        if (root != null)
         {
-            if (raiz.info == x && raiz.hijoIzq.ArbolVacio() && raiz.hijoDer.ArbolVacio())
+            if (root.info == x && root.leftChild.IsTreeEmpty() && root.rightChild.IsTreeEmpty())
             {
-                raiz = null;
+                root = null;
             }
-            else if (raiz.info == x && !raiz.hijoIzq.ArbolVacio())
+            else if (root.info == x && !root.leftChild.IsTreeEmpty())
             {
-                raiz.info = this.mayor(raiz.hijoIzq);
-                raiz.hijoIzq.EliminarElem(raiz.info);
+                root.info = this.FindLargest(root.leftChild);
+                root.leftChild.DeleteElement(root.info);
             }
-            else if (raiz.info == x && raiz.hijoIzq.ArbolVacio())
+            else if (root.info == x && root.leftChild.IsTreeEmpty())
             {
-                raiz.info = this.menor(raiz.hijoDer);
-                raiz.hijoDer.EliminarElem(raiz.info);
+                root.info = this.FindSmallest(root.rightChild);
+                root.rightChild.DeleteElement(root.info);
             }
-            else if (raiz.info < x)
+            else if (root.info < x)
             {
-                raiz.hijoDer.EliminarElem(x);
+                root.rightChild.DeleteElement(x);
             }
             else
             {
-                raiz.hijoIzq.EliminarElem(x);
+                root.leftChild.DeleteElement(x);
             }
         }
     }
 
-    public int mayor(ABB a)
+    public int FindLargest(BinaryTree a)
     {
-        if (a.HijoDer().ArbolVacio())
+        if (a.RightChild().IsTreeEmpty())
         {
-            return a.Raiz();
+            return a.Root();
         }
         else
         {
-            return mayor(a.HijoDer());
+            return FindLargest(a.RightChild());
         }
     }
 
-    public int menor(ABB a)
+    public int FindSmallest(BinaryTree a)
     {
-        if (a.HijoIzq().ArbolVacio())
+        if (a.LeftChild().IsTreeEmpty())
         {
-            return a.Raiz();
+            return a.Root();
         }
         else
         {
-            return menor(a.HijoIzq());
+            return FindSmallest(a.LeftChild());
         }
     }
 }
