@@ -23,6 +23,8 @@ public class Turret : MonoBehaviour
     // New property for the cost
     public int Cost;
 
+    private TargettingMode targettingMode = TargettingMode.HighHealth;
+
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
@@ -32,8 +34,84 @@ public class Turret : MonoBehaviour
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
-        GameObject nearestEnemy = null;
+        GameObject targetGO = null;
+        switch (targettingMode)
+        {
+            case TargettingMode.Close:
+                targetGO = GetClosestTarget(enemies);
+                break;
+            case TargettingMode.LowHealth:
+                targetGO = GetLowestHealthTarget(enemies);
+                break;
+            case TargettingMode.HighHealth:
+                targetGO = GetHighestHealthTarget(enemies);
+                break;
+        }
+        if(targetGO == null)
+        {
+            target = null;
+            return;
+        }
+        target = targetGO.transform;
+    }
 
+    GameObject GetLowestHealthTarget(GameObject[] enemies)
+    {
+        if(enemies.Length <= 0) return null;
+
+        var tree = GetEnemyTree(enemies);
+        NodoABB node = tree.raiz;
+        var previousNode = node;
+
+        while (node != null)
+        {
+            node = node.hijoIzq.raiz;
+            if(node != null)
+            {
+                previousNode = node;
+            }
+        }
+
+        return previousNode.go;
+    }
+
+    GameObject GetHighestHealthTarget(GameObject[] enemies)
+    {
+        if (enemies.Length <= 0) return null;
+
+        var tree = GetEnemyTree(enemies);
+        NodoABB node = tree.raiz;
+        var previousNode = node;
+
+        while (node != null)
+        {
+            node = node.hijoDer.raiz;
+            if (node != null)
+            {
+                previousNode = node;
+            }
+        }
+
+        return previousNode.go;
+    }
+
+    ABB GetEnemyTree(GameObject[] enemies)
+    {
+        var tree = new ABB();
+        foreach (var enemyGO in enemies)
+        {
+            var enemy = enemyGO.GetComponent<EnemyMovement>();
+            tree.AgregarElem((int)enemy.currentHealth, enemyGO);
+        }
+        return tree;
+    }
+
+    GameObject GetClosestTarget(GameObject[] enemies)
+    {
+        if (enemies.Length <= 0) return null;
+
+        GameObject nearestEnemy = null;
+        float shortestDistance = range + 1;
         foreach (GameObject enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
@@ -45,14 +123,21 @@ public class Turret : MonoBehaviour
             }
         }
 
-        if (nearestEnemy != null && shortestDistance <= range)
+        if (IsEnemyValidTarget(nearestEnemy))
         {
-            target = nearestEnemy.transform;
+            return nearestEnemy;
         }
-        else
+        return null;
+    }
+
+    bool IsEnemyValidTarget(GameObject enemy)
+    {
+        if (enemy == null)
         {
-            target = null;
+            return false;
         }
+
+        return Vector3.Distance(transform.position, enemy.transform.position) <= range;
     }
 
     void Update()
@@ -96,3 +181,9 @@ public class Turret : MonoBehaviour
     }
 }
 
+public enum TargettingMode
+{
+    Close = 0,
+    LowHealth = 1,
+    HighHealth = 2
+}

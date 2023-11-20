@@ -10,8 +10,8 @@ public class EnemyMovement : MonoBehaviour
     private EnemySpawner spawner;
 
     private int wavepointIndex = 0;
-
-    private float currentHealth;            // Enemy current health
+    [HideInInspector]
+    public float currentHealth;            // Enemy current health
 
     private Transform target;               // Target meaning the next waypoint in the path
 

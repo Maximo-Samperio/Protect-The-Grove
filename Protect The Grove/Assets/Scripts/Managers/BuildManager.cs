@@ -46,8 +46,8 @@ public class BuildManager : MonoBehaviour
         }
 
         PlayerStats.Money -= turretToBuild.cost;            // I substract the cost
-
-        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);    // I instantiate the turret
+        
+        GameObject turret = Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);    // I instantiate the turret
         node.turret = turret;
 
         placedTurrets.Push(turret);         // I push the new turret on top of the stack
