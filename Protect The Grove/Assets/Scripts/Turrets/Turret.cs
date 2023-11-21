@@ -10,7 +10,7 @@ public class Turret : MonoBehaviour
     const float range = 10f;
     const float fireRate = 1f;
     private float fireCountdown = 0f;
-
+    private ABB arbolEnemigos;
     [Header("Setup fields")]
     public string enemyTag = "Enemy";
 
@@ -27,32 +27,57 @@ public class Turret : MonoBehaviour
 
     void Start()
     {
+        arbolEnemigos = new ABB();
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
     void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-        float shortestDistance = Mathf.Infinity;
-        GameObject targetGO = null;
-        switch (targettingMode)
+
+        arbolEnemigos.InicializarArbol();
+        foreach (var enemyGO in enemies)
         {
-            case TargettingMode.Close:
-                targetGO = GetClosestTarget(enemies);
-                break;
-            case TargettingMode.LowHealth:
-                targetGO = GetLowestHealthTarget(enemies);
-                break;
-            case TargettingMode.HighHealth:
-                targetGO = GetHighestHealthTarget(enemies);
-                break;
+            var enemy = enemyGO.GetComponent<EnemyMovement>();
+            arbolEnemigos.AgregarElem((int)enemy.currentHealth, enemyGO);
         }
-        if(targetGO == null)
+
+        // Selecciona el primer objetivo según el árbol binario
+        GameObject firstTarget = GetFirstTarget(arbolEnemigos.raiz);
+
+        // Si se encuentra un objetivo, asigna el target
+        if (firstTarget != null)
         {
-            target = null;
-            return;
+            target = firstTarget.transform;
         }
-        target = targetGO.transform;
+        else
+        {
+            // Si no hay objetivo según el árbol, selecciona según la lógica de distancia más cercana
+            switch (targettingMode)
+            {
+                case TargettingMode.Close:
+                    target = GetClosestTarget(enemies)?.transform;
+                    break;
+                case TargettingMode.LowHealth:
+                    target = GetLowestHealthTarget(enemies)?.transform;
+                    break;
+                case TargettingMode.HighHealth:
+                    target = GetHighestHealthTarget(enemies)?.transform;
+                    break;
+            }
+        }
+    }
+
+
+    GameObject GetFirstTarget(NodoABB nodo)
+    {
+        if (nodo == null)
+            return null;
+
+        if (nodo.hijoIzq == null || nodo.hijoIzq.ArbolVacio())
+            return nodo.go;
+
+        return GetFirstTarget(nodo.hijoIzq.raiz);
     }
 
     GameObject GetLowestHealthTarget(GameObject[] enemies)
@@ -153,6 +178,8 @@ public class Turret : MonoBehaviour
         {
             Shoot();
             fireCountdown = 1f / fireRate;
+
+            UpdateTarget();
         }
 
         fireCountdown -= Time.deltaTime;

@@ -19,7 +19,7 @@ public class NodoABB
 
 public class ABB
 {
-    public NodoABB raiz;
+    public NodoABB raiz { get; set; }
 
     public int Raiz()
     {
