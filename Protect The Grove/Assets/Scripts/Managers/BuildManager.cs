@@ -72,6 +72,4 @@ public class BuildManager : MonoBehaviour
             Destroy(removedTurret);
         }
     }
-
-
 }

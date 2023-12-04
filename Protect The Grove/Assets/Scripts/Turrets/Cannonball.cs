@@ -50,7 +50,6 @@ public class Cannonball : MonoBehaviour
     {
         EnemyMovement e = enemy.GetComponent<EnemyMovement>();
 
-
         if (e != null) 
         {
             e.TakeDamage(damage);
