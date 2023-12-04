@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
+using System.IO;
 
 public class EnemyMovement : MonoBehaviour
 {
     public EnemyType enemyType;
     private EnemySpawner spawner;
+    public Dijkstra dijkstra;           // Reference to the Dijkstra script
+    private List<Waypoints> path;       // The calculated path for the enemy
+    private int currentWaypointIndex = 0;
+    public Waypoints startWaypoint; 
+    public Waypoints endWaypoint;   
+
 
     private int wavepointIndex = 0;
     [HideInInspector]
@@ -27,34 +34,48 @@ public class EnemyMovement : MonoBehaviour
         spawner = GameObject.FindObjectOfType<EnemySpawner>();
         currentHealth = enemyType.maxHealth;        // I set the current health to be that of the max health on start
 
-        target = Waypoints.points[0];
+
+        dijkstra = FindObjectOfType<Dijkstra>();
+
+        // Calculate the path using Dijkstra's algorithm
+        path = dijkstra.CalculateShortestPath(startWaypoint, endWaypoint);
+
     }
 
 
     void Update () 
     {
-        Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * enemyType.speed * Time.deltaTime, Space.World);
-
-        if (Vector3.Distance(transform.position, target.position) <= 0.4f)
-        {
-            GetNextWaypoint();
-        }
-
+        MoveToNextWaypoint();
     }
 
-    void GetNextWaypoint()
+    void MoveToNextWaypoint()
     {
-        if (wavepointIndex >= Waypoints.points.Length - 1)
-        {
-            EndPath();
+        if (path == null || path.Count == 0)
             return;
+
+        Waypoints targetWaypoint = path[currentWaypointIndex];
+
+        // Move towards the current target waypoint
+        transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.transform.position, enemyType.speed * Time.deltaTime);
+
+        // Check if the enemy has reached the waypoint
+        if (Vector3.Distance(transform.position, targetWaypoint.transform.position) < 0.1f)
+        {
+            // Move to the next waypoint
+            currentWaypointIndex++;
+
+            // Check if there are more waypoints
+            if (currentWaypointIndex < path.Count)
+            {
+                targetWaypoint = path[currentWaypointIndex];
+            }
+            else
+            {
+                // The enemy has reached the end of the path
+                // Add logic for what happens when the enemy reaches its destination
+            }
         }
-
-        wavepointIndex++;
-        target = Waypoints.points[wavepointIndex];
     }
-
 
 
     public void TakeDamage(float amount)              // Allows the enemy to take damage drom each shot

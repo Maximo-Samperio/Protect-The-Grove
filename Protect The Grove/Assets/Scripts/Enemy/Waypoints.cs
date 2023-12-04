@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    public static Transform[] points;
+    public List<Waypoints> neighbors = new List<Waypoints>();
 
-    void Awake()
+    // Add neighbor waypoints
+    public void AddNeighbor(Waypoints neighbor)
     {
-        points = new Transform[transform.childCount];
-        for (int i = 0; i < points.Length; i++)
+        if (!neighbors.Contains(neighbor))
         {
-            points[i] = transform.GetChild(i);
+            neighbors.Add(neighbor);
+            neighbor.neighbors.Add(this); // Assuming bidirectional movement
         }
     }
 }
