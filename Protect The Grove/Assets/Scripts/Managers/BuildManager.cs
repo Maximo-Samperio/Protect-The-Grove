@@ -25,6 +25,7 @@ public class BuildManager : MonoBehaviour
     //--Start of turret instantiation section--//
 
     public GameObject standardTurretPrefab;
+    public GameObject standardMissilePrefab;
 
     public GameObject buildEffect;
 
