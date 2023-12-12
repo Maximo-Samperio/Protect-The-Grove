@@ -11,6 +11,9 @@ public class EnemySpawner : MonoBehaviour
     public Wave[] waves;                                // List with all of the enemies in the wave
     private Queue<GameObject> enemyQueue = new Queue<GameObject>();         // Queue to store enemies
 
+    public Waypoints startWaypoint;
+    public Waypoints endWaypoint;
+
     Wave _wave = new Wave();                            // I reference the wave script
 
     public GameObject enemy;                            // The enemy GO

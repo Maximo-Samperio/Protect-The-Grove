@@ -12,6 +12,8 @@ public class EnemyMovement : MonoBehaviour
     public Dijkstra dijkstra;           // Reference to the Dijkstra script
     private List<Waypoints> path;       // The calculated path for the enemy
     private int currentWaypointIndex = 0;
+
+    public EnemySpawner Spawner;
     public Waypoints startWaypoint; 
     public Waypoints endWaypoint;   
 
@@ -34,10 +36,12 @@ public class EnemyMovement : MonoBehaviour
         spawner = GameObject.FindObjectOfType<EnemySpawner>();
         currentHealth = enemyType.maxHealth;        // I set the current health to be that of the max health on start
 
+        //startWaypoint = Spawner.startWaypoint;
+        //endWaypoint = Spawner.endWaypoint;
 
         dijkstra = FindObjectOfType<Dijkstra>();
 
-        // Calculate the path using Dijkstra's algorithm
+        // Calculate the path using Dijkstra
         path = dijkstra.CalculateShortestPath(startWaypoint, endWaypoint);
 
     }
@@ -72,7 +76,7 @@ public class EnemyMovement : MonoBehaviour
             else
             {
                 // The enemy has reached the end of the path
-                // Add logic for what happens when the enemy reaches its destination
+                EndPath();
             }
         }
     }
