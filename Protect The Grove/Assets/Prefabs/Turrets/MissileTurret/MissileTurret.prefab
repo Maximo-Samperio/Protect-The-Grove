@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3870352885405305390}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.046, y: 1.1267107, z: 0.289}
+  m_LocalPosition: {x: -0.089, y: 1.1267107, z: 0.289}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 5367871703595366440}
   - component: {fileID: 7600215161743583583}
   - component: {fileID: -2729422391455844950}
-  - component: {fileID: 699643497978942158}
+  - component: {fileID: 7186889596177990422}
   m_Layer: 0
   m_Name: MissileTurret
   m_TagString: Untagged
@@ -290,7 +290,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &699643497978942158
+--- !u!114 &7186889596177990422
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,11 +299,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7541816184700952252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b689a155fb28db54ab57862800bf5e62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e8871935513c9749b4919a026c7b2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTag: Enemy
   partToRotate: {fileID: 3952642348912017591}
-  bulletPrefab: {fileID: 8103818072855254765, guid: f4e48245fcd44404f9ec01c7c872b400, type: 3}
+  missilePrefab: {fileID: 8103818072855254765, guid: f4e48245fcd44404f9ec01c7c872b400, type: 3}
   firePoint: {fileID: 1372588834498146417}
   Cost: 300
