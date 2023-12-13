@@ -8,7 +8,7 @@ public class MissileTurret : MonoBehaviour
     [Header("Attributes")]
     private Transform target;
     const float range = 30f;
-    const float fireRate = 0.5f;
+    const float fireRate = 0.2f;
     private float fireCountdown = 0f;
 
     [Header("Setup fields")]
