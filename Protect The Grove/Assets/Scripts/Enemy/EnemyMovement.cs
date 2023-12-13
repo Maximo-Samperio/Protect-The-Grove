@@ -30,19 +30,37 @@ public class EnemyMovement : MonoBehaviour
     public WaypointGraph waypointManager;
     private Waypoints currentWaypoint;
 
+    string startWaypointName = "StartWaypoint";
+    string endWaypointName = "EndWaypoint";
+
+
 
     void Start ()
     {
         spawner = GameObject.FindObjectOfType<EnemySpawner>();
         currentHealth = enemyType.maxHealth;        // I set the current health to be that of the max health on start
+        dijkstra = FindObjectOfType<Dijkstra>();
+
+        GameObject startWaypointGO = GameObject.Find(startWaypointName);
+        GameObject endWaypointGO = GameObject.Find(endWaypointName);
+
+        if (startWaypointGO != null && endWaypointGO != null)
+        {
+            SetWaypoints(startWaypointGO.GetComponent<Waypoints>(), endWaypointGO.GetComponent<Waypoints>());
+        }
+        else
+        {
+            Debug.LogError("Couldn't find one or both waypoints with the specified names.");
+        }
+
+
 
         //startWaypoint = Spawner.startWaypoint;
         //endWaypoint = Spawner.endWaypoint;
 
-        dijkstra = FindObjectOfType<Dijkstra>();
 
         // Calculate the path using Dijkstra
-        path = dijkstra.CalculateShortestPath(startWaypoint, endWaypoint);
+        //path = dijkstra.CalculateShortestPath(startWaypoint, endWaypoint);
 
     }
 
@@ -134,4 +152,15 @@ public class EnemyMovement : MonoBehaviour
         //_wave.Dequeue(gameObject);
 
     }
+
+    public void SetWaypoints(Waypoints start, Waypoints end)
+    {
+        startWaypoint = start;
+        endWaypoint = end;
+
+        // Recalculate the path using Dijkstra when waypoints are set
+        path = dijkstra.CalculateShortestPath(start, end);
+        currentWaypointIndex = 0; // Reset waypoint index
+    }
+
 }
