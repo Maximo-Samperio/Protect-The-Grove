@@ -70,6 +70,8 @@ MonoBehaviour:
     enemy: {fileID: 3338430982246267162, guid: 82df208d41db96148b0898475566daae, type: 3}
     count: 10
     rate: 3
+  startWaypoint: {fileID: 0}
+  endWaypoint: {fileID: 0}
   enemy: {fileID: 3338430982246267162, guid: 93aefcd2392609e4faf54ccb06f8c07b, type: 3}
   waveIndex: 0
 --- !u!1 &1310319169746228639
@@ -121,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standardTurretPrefab: {fileID: 5921079061657416352, guid: 5825b19b764538344bbd7763a6931c5c, type: 3}
+  standardMissilePrefab: {fileID: 7541816184700952252, guid: 1885f80dd6d9819459452c7bd7ff5b6d, type: 3}
   buildEffect: {fileID: 4088514410326083299, guid: d97a1c9f81e4c294280dc2e54c21f9f5, type: 3}
   turretToBuild:
     prefab: {fileID: 5921079061657416352, guid: 5825b19b764538344bbd7763a6931c5c, type: 3}
