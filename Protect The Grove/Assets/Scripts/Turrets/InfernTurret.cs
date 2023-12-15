@@ -12,7 +12,7 @@ public class InfernTurret : MonoBehaviour
     private float fireCountdown = 0f;
     private float damage = 0;
     [SerializeField]
-    private float damageIncrease = 1;
+    private float damageIncrease = 0.5f;
     private EnemyMovement enemy;
 
     [Header("Setup fields")]
