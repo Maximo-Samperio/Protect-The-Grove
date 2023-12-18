@@ -6,6 +6,7 @@ public class Shop : MonoBehaviour
 {
     public TurretBlueprint standardTurret;
     public TurretBlueprint missileTurret;
+    public TurretBlueprint infernalTurret;
     BuildManager buildManager;
 
     private void Start()
@@ -21,5 +22,11 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("Standard Missile selected");
         buildManager.SelectTurretToBuild(missileTurret);       // I pass the GO prefab
+    }
+
+    public void SelectInfernaltTurret()
+    {
+        Debug.Log("Infernal Turret selected");
+        buildManager.SelectTurretToBuild(infernalTurret);
     }
 }

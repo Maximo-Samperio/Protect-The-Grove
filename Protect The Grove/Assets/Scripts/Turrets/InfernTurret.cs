@@ -34,14 +34,28 @@ public class InfernTurret : MonoBehaviour
 
     void Update()
     {
-        if (target == null)
-        {
-            damage = 0;
-            return;
-        }
+        if (target == null) { return; }
+
+        Vector3 dir = target.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(dir);
+        Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         damage += damageIncrease * Time.deltaTime;
         Damage();
     }
+
+    void LockOnTarget()
+    {
+        // Activa el objeto laser
+        laser.SetActive(true);
+
+        // Actualiza la posición del laser
+        laser.transform.position = partToRotate.position;
+        laser.transform.LookAt(target);
+
+        // Puedes ajustar el escalado, color, o cualquier otra propiedad aquí
+    }
+
 
     void Damage()
     {
@@ -73,6 +87,7 @@ public class InfernTurret : MonoBehaviour
         if(targetGO == null)
         {
             target = null;
+            laser.SetActive(false);
             return;
         }
         target = targetGO.transform;
