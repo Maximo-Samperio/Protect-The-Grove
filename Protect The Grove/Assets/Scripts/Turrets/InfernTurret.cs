@@ -24,6 +24,7 @@ public class InfernTurret : MonoBehaviour
 
     // New property for the cost
     public int Cost;
+    private bool isAttacking = false;
 
     private TargettingMode targettingMode = TargettingMode.Close;
 
@@ -34,12 +35,25 @@ public class InfernTurret : MonoBehaviour
 
     void Update()
     {
-        if (target == null) { return; }
+        if (target == null)
+        {
+            // Restablece la bandera cuando el objetivo es nulo
+            isAttacking = false;
+            return;
+        }
 
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+
+        // Verifica si el ataque está en curso antes de reproducir el sonido
+        if (!isAttacking)
+        {
+            FindObjectOfType<AudioManager>().Play("InfernShoot");
+            isAttacking = true; // Establece la bandera cuando comienza el ataque
+        }
+
         damage += damageIncrease * Time.deltaTime;
         Damage();
     }
@@ -59,11 +73,9 @@ public class InfernTurret : MonoBehaviour
 
     void Damage()
     {
-
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
-
         }
     }
 

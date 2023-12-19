@@ -11,7 +11,7 @@ public class Cannonball : MonoBehaviour
     public GameObject impactEffect;
 
 
-    public void Seek (Transform _target)
+    public void Seek(Transform _target)
     {
         target = _target;                                           // I pass the value from the turret script
     }
@@ -50,7 +50,7 @@ public class Cannonball : MonoBehaviour
     {
         EnemyMovement e = enemy.GetComponent<EnemyMovement>();
 
-        if (e != null) 
+        if (e != null)
         {
             e.TakeDamage(damage);
 
