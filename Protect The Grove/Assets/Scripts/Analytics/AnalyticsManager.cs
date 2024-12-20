@@ -39,4 +39,17 @@ public class AnalyticsManager : MonoBehaviour
         AnalyticsService.Instance.RecordEvent("heavyUnitImpact");
         Debug.Log($"Analytics Event Sent: heavyUnitImpact with time_to_kill: {timeToKill}");
     }
+
+    // Método para enviar el evento de oro gastado por partida
+    public void SendGoldSpentEvent(float goldSpent)
+    {
+        var eventData = new Dictionary<string, object>
+        {
+            { "gold_spent", goldSpent }
+        };
+
+        // Enviar evento con datos
+        AnalyticsService.Instance.RecordEvent("totalGoldSpent");
+        Debug.Log($"Analytics Event Sent: totalGoldSpent with gold_spent: {goldSpent}");
+    }
 }
