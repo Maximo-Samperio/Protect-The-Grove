@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
 using System.IO;
+using Unity.Services.Analytics;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -14,9 +15,8 @@ public class EnemyMovement : MonoBehaviour
     private int currentWaypointIndex = 0;
 
     public EnemySpawner Spawner;
-    public Waypoints startWaypoint; 
-    public Waypoints endWaypoint;   
-
+    public Waypoints startWaypoint;
+    public Waypoints endWaypoint;
 
     private int wavepointIndex = 0;
     [HideInInspector]
@@ -33,9 +33,10 @@ public class EnemyMovement : MonoBehaviour
     string startWaypointName = "StartWaypoint";
     string endWaypointName = "EndWaypoint";
 
+    // Nuevo: variable para medir el tiempo hasta la muerte
+    private float timeAlive = 0f;
 
-
-    void Start ()
+    void Start()
     {
         spawner = GameObject.FindObjectOfType<EnemySpawner>();
         currentHealth = enemyType.maxHealth;        // I set the current health to be that of the max health on start
@@ -52,21 +53,11 @@ public class EnemyMovement : MonoBehaviour
         {
             Debug.LogError("Couldn't find one or both waypoints with the specified names.");
         }
-
-
-
-        //startWaypoint = Spawner.startWaypoint;
-        //endWaypoint = Spawner.endWaypoint;
-
-
-        // Calculate the path using Dijkstra
-        //path = dijkstra.CalculateShortestPath(startWaypoint, endWaypoint);
-
     }
 
-
-    void Update () 
+    void Update()
     {
+        timeAlive += Time.deltaTime;  // Aumenta el tiempo que el enemigo ha estado vivo
         MoveToNextWaypoint();
     }
 
@@ -99,7 +90,6 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-
     public void TakeDamage(float amount)              // Allows the enemy to take damage drom each shot
     {
         currentHealth -= amount;                    // I substract the damage from the current health
@@ -121,20 +111,19 @@ public class EnemyMovement : MonoBehaviour
 
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
         Wave _wave = new Wave();
-        //FindObjectOfType<AudioManager>().Play("enemyDeath");
+
+        // Enviar el evento de impacto con el tiempo hasta ser derrotado
+        SendHeavyUnitImpactEvent(timeAlive);
 
         spawner.RemoveEnemyFromQueue(gameObject);
 
-
         Destroy(gameObject);                        // I destroy the GO
-        //_wave.Dequeue(gameObject);                  // I remove the enemy from the Queue
 
         if (EnemySpawner.bossActive == true)
         {
             GameManager.LevelCompleted = true;
             EnemySpawner.bossActive = false;
         }
-
     }
 
     void EndPath()                                  // It activates if the enemy has entered the player's tower
@@ -148,9 +137,6 @@ public class EnemyMovement : MonoBehaviour
         EnemySpawner.EnemiesAlive--;                // I substract one from the list of enemies alive
         spawner.RemoveEnemyFromQueue(gameObject);
         Destroy(gameObject);                        // The enemy is destroyed
-
-        //_wave.Dequeue(gameObject);
-
     }
 
     public void SetWaypoints(Waypoints start, Waypoints end)
@@ -163,4 +149,16 @@ public class EnemyMovement : MonoBehaviour
         currentWaypointIndex = 0; // Reset waypoint index
     }
 
+    // Nuevo método para enviar el evento de impacto
+    private void SendHeavyUnitImpactEvent(float timeToKill)
+    {
+        var eventData = new Dictionary<string, object>
+        {
+            { "time_to_kill", timeToKill }
+        };
+
+        // Enviar evento de impacto del boss
+        AnalyticsService.Instance.RecordEvent("heavyUnitImpact");
+        Debug.Log($"Analytics Event Sent: heavyUnitImpact with time_to_kill: {timeToKill}");
+    }
 }

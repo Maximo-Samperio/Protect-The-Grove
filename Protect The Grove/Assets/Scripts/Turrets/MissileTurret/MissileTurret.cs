@@ -1,7 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Services.Analytics;
+using Unity.Services.Core;
 
 public class MissileTurret : MonoBehaviour
 {
@@ -173,6 +174,15 @@ public class MissileTurret : MonoBehaviour
         {
             missile.Seek(target);
         }
+
+        // Send event to Unity Analytics
+        SendMissileAnalyticsEvent();
+    }
+
+    void SendMissileAnalyticsEvent()
+    {
+        AnalyticsService.Instance.RecordEvent("missileTowerShot");
+        Debug.Log("Analytics Event Sent: missileTowerShot");
     }
 
     void OnDrawGizmosSelected()
@@ -182,10 +192,9 @@ public class MissileTurret : MonoBehaviour
     }
 }
 
-public enum TurretTargettingMode
+public enum TargettingMode
 {
     Close = 0,
     LowHealth = 1,
     HighHealth = 2
 }
-

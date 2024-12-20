@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Services.Analytics;
+using Unity.Services.Core;
 
 public class InfernTurret : MonoBehaviour
 {
@@ -56,6 +58,9 @@ public class InfernTurret : MonoBehaviour
 
         damage += damageIncrease * Time.deltaTime;
         Damage();
+
+        // Enviar el evento de analytics con el daño acumulado
+        SendMushroomLaserDamageAnalyticsEvent(damage);
     }
 
     void LockOnTarget()
@@ -69,7 +74,6 @@ public class InfernTurret : MonoBehaviour
 
         // Puedes ajustar el escalado, color, o cualquier otra propiedad aquí
     }
-
 
     void Damage()
     {
@@ -96,14 +100,14 @@ public class InfernTurret : MonoBehaviour
                 targetGO = GetHighestHealthTarget(enemies);
                 break;
         }
-        if(targetGO == null)
+        if (targetGO == null)
         {
             target = null;
             laser.SetActive(false);
             return;
         }
         target = targetGO.transform;
-        if (target!= previoustarget)
+        if (target != previoustarget)
         {
             damage = 0;
             if (target != null)
@@ -116,7 +120,7 @@ public class InfernTurret : MonoBehaviour
 
     GameObject GetLowestHealthTarget(GameObject[] enemies)
     {
-        if(enemies.Length <= 0) return null;
+        if (enemies.Length <= 0) return null;
 
         var tree = GetEnemyTree(enemies);
         NodoABB node = tree.raiz;
@@ -125,7 +129,7 @@ public class InfernTurret : MonoBehaviour
         while (node != null)
         {
             node = node.hijoIzq.raiz;
-            if(node != null)
+            if (node != null)
             {
                 previousNode = node;
             }
@@ -199,6 +203,19 @@ public class InfernTurret : MonoBehaviour
         return Vector3.Distance(transform.position, enemy.transform.position) <= range;
     }
 
+    // Método para enviar el evento de Analytics
+    void SendMushroomLaserDamageAnalyticsEvent(float totalDamage)
+    {
+        // Crea un diccionario con el parámetro del evento
+        var eventData = new Dictionary<string, object>
+        {
+            { "total_damage", totalDamage }
+        };
+
+        // Enviar el evento correctamente usando RecordEvent
+        AnalyticsService.Instance.RecordEvent("mushroomLaserDamage");
+        Debug.Log($"Analytics Event Sent: mushroomLaserDamage with total_damage: {totalDamage}");
+    }
 
     void OnDrawGizmosSelected()
     {

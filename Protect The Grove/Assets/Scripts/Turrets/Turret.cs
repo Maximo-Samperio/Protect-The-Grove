@@ -181,7 +181,7 @@ public class Turret : MonoBehaviour
     }
 }
 
-public enum TargettingMode
+public enum TargettingMode1
 {
     Close = 0,
     LowHealth = 1,
